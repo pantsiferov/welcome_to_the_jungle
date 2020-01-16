@@ -23,6 +23,7 @@ const options = {
     },
   },
   fontSizes: {
+    h3: '1.5rem',
     h6: '1rem',
   },
 };

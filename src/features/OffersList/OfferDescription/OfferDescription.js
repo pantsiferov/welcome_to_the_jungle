@@ -1,13 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link as RouterLink } from 'react-router-dom';
 import { Card } from '@welcome-ui/card';
 import { Box } from '@welcome-ui/box';
 import { Button } from '@welcome-ui/button';
 import { Text } from '@welcome-ui/text';
+import { Link } from '@welcome-ui/link';
 
 
 function OfferDescription(props) {
-  const { name, description } = props;
+  const { name, description, id } = props;
   return (
     <Box
       display="flex"
@@ -42,9 +44,11 @@ function OfferDescription(props) {
                 {description}
               </Text>
             </Box>
-            <Button variant="quaternary">
-            See more
-            </Button>
+            <Link borderBottom={0} as={RouterLink} to={`/offers/${id}`}>
+              <Button variant="quaternary">
+                See more
+              </Button>
+            </Link>
           </Box>
         </Card.Body>
       </Card>
@@ -55,11 +59,16 @@ function OfferDescription(props) {
 OfferDescription.propTypes = {
   name: PropTypes.string,
   description: PropTypes.string,
+  id: PropTypes.oneOfType([
+    PropTypes.number,
+    PropTypes.string,
+  ]),
 };
 
 OfferDescription.defaultProps = {
   name: '',
   description: '',
+  id: null,
 };
 
 export default OfferDescription;

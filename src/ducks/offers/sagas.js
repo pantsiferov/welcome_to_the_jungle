@@ -1,6 +1,6 @@
-import { call, takeEvery, put } from 'redux-saga/effects';
+import { call, put, fork } from 'redux-saga/effects';
 import { fetchOffers } from './services';
-import { fetchOffersRequest, fetchOffersSuccess } from './reducer';
+import { fetchOffersSuccess } from './reducer';
 import { mapOffersToState } from './mappers';
 
 
@@ -15,5 +15,7 @@ function* fetchOffersSaga() {
 }
 
 export function* offersRootSaga() {
-  yield takeEvery(fetchOffersRequest, fetchOffersSaga);
+  // TODO in production it better use with takeEvery and action
+  // yield takeEvery(fetchOffersRequest, fetchOffersSaga);
+  yield fork(fetchOffersSaga);
 }

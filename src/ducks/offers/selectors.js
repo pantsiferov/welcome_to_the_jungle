@@ -14,6 +14,25 @@ export const selectContractTypeReference = createSelector(
   })),
 );
 
+export const selectPublishedTimes = createSelector(
+  (state) => get(state, 'offers.publishedTimes'),
+  (publishedTimes = []) => publishedTimes.map((item) => ({
+    value: item,
+    label: item,
+  })).sort(),
+);
+
+const selectAttributesByGroup = (state) => get(state, 'offers.attributesGroup');
+
+export const selectAttributesByGroupToSelect = createSelector(
+  selectAttributesByGroup,
+  (attributesGroups = {}) => Object.values(attributesGroups).map((item) => ({
+    value: item.id,
+    label: `${item.type} - ${item.name}`,
+    type: item.type,
+  })),
+);
+
 const filtersRules = {
   search: (string, item) => get(item, 'name').includes(string),
   contractTypes: (string, item) => get(item, 'contract_type.en').includes(string),
@@ -41,21 +60,7 @@ export const selectOffersWithFilters = createSelector(
 );
 
 
-export const selectPublishedTimes = createSelector(
-  (state) => get(state, 'offers.publishedTimes'),
-  (publishedTimes = []) => publishedTimes.map((item) => ({
-    value: item,
-    label: item,
-  })).sort(),
-);
-
-const selectAttributesByGroup = (state) => get(state, 'offers.attributesGroup');
-
-export const selectAttributesByGroupToSelect = createSelector(
-  selectAttributesByGroup,
-  (attributesGroups = {}) => Object.values(attributesGroups).map((item) => ({
-    value: item.id,
-    label: `${item.type} - ${item.name}`,
-    type: item.type,
-  })),
-);
+export const selectOfferById = (state, id) => {
+  const offers = get(state, 'offers.offers', {});
+  return offers[id];
+};

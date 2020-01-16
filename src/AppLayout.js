@@ -1,8 +1,9 @@
 import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { Box } from '@welcome-ui/box';
 
 import OffersList from './features/OffersList';
+import OfferDetails from './features/OfferDetails';
 
 const App = () => (
   <Box
@@ -14,8 +15,9 @@ const App = () => (
   >
     <Box padding="50px">
       <Switch>
-        <Route exact path="/" component={OffersList} />
-        <Route exact path="/about-us" component={OffersList} />
+        <Route exact path="/offers" component={OffersList} />
+        <Route exact strict path="/offers/:id" component={OfferDetails} />
+        <Route exact path="*" render={() => <Redirect to="/offers" />} />
       </Switch>
     </Box>
   </Box>
