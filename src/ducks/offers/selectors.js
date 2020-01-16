@@ -1,4 +1,5 @@
 import get from 'lodash.get';
+import includes from 'lodash.includes';
 import { createSelector } from 'reselect';
 
 import { parseQueryString } from 'helpers/queryStringHelper';
@@ -33,9 +34,13 @@ export const selectAttributesByGroupToSelect = createSelector(
   })),
 );
 
+export function includesSubstring(string, substring) {
+  return includes(string.toLowerCase(), substring.toLowerCase());
+}
+
 const filtersRules = {
-  search: (string, item) => get(item, 'name').includes(string),
-  contractTypes: (string, item) => get(item, 'contract_type.en').includes(string),
+  search: (string, item) => includesSubstring(get(item, 'name'), string),
+  contractTypes: (string, item) => includesSubstring(get(item, 'contract_type.en'), string),
   date: (dateString, item) => dateStringToTimeStamp(get(item, 'published_at')) >= dateStringToTimeStamp(dateString),
   groupBy: (attr = {}, item) => get(item, `${attr.type}.id`) === Number(attr.id),
 };

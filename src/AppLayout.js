@@ -13,7 +13,7 @@ const App = () => (
     alignItems="center"
     backgroundColor="white"
   >
-    <Box padding="50px">
+    <Box>
       <Switch>
         <Route exact path="/offers" component={OffersList} />
         <Route exact strict path="/offers/:id" component={OfferDetails} />

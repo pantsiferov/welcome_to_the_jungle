@@ -7,17 +7,11 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.<br />
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### IMPORTANT 
+it will be work only with yarn start because it run webpack dev server with proxy, for build it need to config in webserver(ngnix) or setup cross origin http request
 
-### `yarn build`
+usually a file .env is not written to the repository, but in our case it is appropriate for ease of checking the task
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+the UI does not provide the ability to reset the filter, and it has not been implemented, but in a real application it needs to be implemented
