@@ -1,16 +1,19 @@
-import {  fork, call } from 'redux-saga/effects';
-import { fetchOffers } from './services'
+import { call, takeEvery, put } from 'redux-saga/effects';
+import { fetchOffers } from './services';
+import { fetchOffersRequest, fetchOffersSuccess } from './reducer';
+import { mapOffersToState } from './mappers';
 
 
 function* fetchOffersSaga() {
-    try {
-     const value = yield call(fetchOffers)
-     console.log(value)
-    }catch (e) {
-      console.log(e)
-    }
+  try {
+    const data = yield call(fetchOffers);
+    yield put(fetchOffersSuccess(mapOffersToState(data)));
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.log(e);
+  }
 }
 
 export function* offersRootSaga() {
-  yield fork(fetchOffersSaga);
+  yield takeEvery(fetchOffersRequest, fetchOffersSaga);
 }

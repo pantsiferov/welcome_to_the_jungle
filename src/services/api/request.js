@@ -13,9 +13,7 @@ const handleErrors = (response) => {
 };
 
 
-const setBaseUrl = (url) => {
-  return `/${url}`;
-};
+const setBaseUrl = (url) => `/${url}`;
 
 
 class Request {
